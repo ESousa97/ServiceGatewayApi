@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/ApiGateway.py",
+      "src": "api/apigateway.py",
       "use": "@vercel/python",
       "config": { "runtime": "python-3.12" }
     }
@@ -10,7 +10,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/ApiGateway.py"
+      "dest": "/api/apigateway.py"
     }
   ]
 }
