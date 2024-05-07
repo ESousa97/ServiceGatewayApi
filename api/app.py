@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, abort
 import requests
 import logging
 from flask_cors import CORS
@@ -11,7 +11,12 @@ CORS(app, origins='*')
 
 @app.route('/cluster-tickets', methods=['POST'])
 def cluster_tickets():
-    tickets = request.get_json()
+    data = request.get_json()
+    if not data or 'tickets' not in data or not isinstance(data['tickets'], list):
+        logging.error("Invalid data format")
+        abort(400, description="Bad Request: JSON body must be a list of ticket dictionaries.")
+    
+    tickets = data['tickets']
     descriptions = [
         " ".join([
             ticket.get('cause_by', ''),
@@ -19,7 +24,7 @@ def cluster_tickets():
             ticket.get('solution_by', ''),
             ticket.get('validated_by', '')
         ]).strip()
-        for ticket in tickets
+        for ticket in tickets if isinstance(ticket, dict)
     ]
 
     logging.debug(f"Descriptions: {descriptions}")
