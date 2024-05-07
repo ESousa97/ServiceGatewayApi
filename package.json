@@ -1,5 +1,5 @@
 {
-  "name": "my-nextjs-flask-app",
+  "name": "servicegatewayapi",
   "version": "0.1.0",
   "private": true,
   "scripts": {

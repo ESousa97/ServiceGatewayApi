@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/apigateway.py",
+      "src": "api/app.py",
       "use": "@vercel/python",
       "config": { "runtime": "python-3.12" }
     }
@@ -10,7 +10,11 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/apigateway.py"
+      "dest": "/api/app.py"
+    },
+    {
+      "src": "cluster-tickets",
+      "dest": "/api/app.py"
     }
   ]
 }
