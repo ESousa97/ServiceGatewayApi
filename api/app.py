@@ -48,7 +48,7 @@ def cluster_tickets():
         return jsonify({"error": str(e)}), 500
 
     try:
-        cluster_response = requests.post('http://localhost:5004/cluster', json={"vectors": vectors})
+        cluster_response = requests.post('https://service-group-api.vercel.app/cluster', json={"vectors": vectors})
         cluster_response.raise_for_status()
         labels = cluster_response.json()
         logging.debug(f"Labels: {labels}")
