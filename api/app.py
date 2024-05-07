@@ -30,7 +30,7 @@ def cluster_tickets():
     logging.debug(f"Descriptions: {descriptions}")
 
     try:
-        normalized_response = requests.post('http://localhost:5005/normalize', json={"texts": descriptions})
+        normalized_response = requests.post('https://service-standardization-text-api.vercel.app/normalize', json={"texts": descriptions})
         normalized_response.raise_for_status()
         normalized_texts = normalized_response.json()
         logging.debug(f"Normalized Texts: {normalized_texts}")
