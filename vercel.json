@@ -13,7 +13,7 @@
       "dest": "/api/app.py"
     },
     {
-      "src": "cluster-tickets",
+      "src": "/cluster-tickets",
       "dest": "/api/app.py"
     }
   ]
