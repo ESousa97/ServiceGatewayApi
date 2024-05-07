@@ -39,7 +39,7 @@ def cluster_tickets():
         return jsonify({"error": str(e)}), 500
 
     try:
-        vector_response = requests.post('http://localhost:5003/vectorize', json={"texts": normalized_texts})
+        vector_response = requests.post('https://service-vectorization-api.vercel.app/vectorize', json={"texts": normalized_texts})
         vector_response.raise_for_status()
         vectors = vector_response.json()
         logging.debug(f"Vectors: {vectors}")
