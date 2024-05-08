@@ -24,7 +24,7 @@ def cluster_tickets():
     logging.debug(f"Descriptions: {descriptions}")
 
     try:
-        normalized_response = requests.post('https://service-standardization-text-api.vercel.app/normalize', json={"texts": descriptions})
+        normalized_response = requests.post('https://service-standardization-text-api.vercel.app/normalize', json={"texts": descriptions}, timeout=60)
         normalized_response.raise_for_status()
         normalized_texts = normalized_response.json()
         logging.debug(f"Normalized Texts: {normalized_texts}")
@@ -33,7 +33,7 @@ def cluster_tickets():
         return jsonify({"error": str(e)}), 500
 
     try:
-        vector_response = requests.post('https://service-vectorization-api.vercel.app/vectorize', json={"texts": normalized_texts})
+        vector_response = requests.post('https://service-vectorization-api.vercel.app/vectorize', json={"texts": normalized_texts}, timeout=60)
         vector_response.raise_for_status()
         vectors = vector_response.json()
         logging.debug(f"Vectors: {vectors}")
@@ -42,7 +42,7 @@ def cluster_tickets():
         return jsonify({"error": str(e)}), 500
 
     try:
-        cluster_response = requests.post('https://service-group-api.vercel.app/cluster', json={"vectors": vectors})
+        cluster_response = requests.post('https://service-group-api.vercel.app/cluster', json={"vectors": vectors}, timeout=60)
         cluster_response.raise_for_status()
         labels = cluster_response.json()
         logging.debug(f"Labels: {labels}")
